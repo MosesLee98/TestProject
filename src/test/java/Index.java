@@ -5,7 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.Select;
+import java.time.Duration;
 
 public class Index {
     WebDriver driver;
@@ -69,7 +69,34 @@ public class Index {
 	public void goToAboutUs() {
 		WebElement element = driver.findElement(By.linkText(databank.aboutUs));
 		element.click();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
 		Assert.assertTrue(element.isSelected());
 	}
 
+	// Go to Menu page
+	@Test
+	public void goToMenu() {
+		WebElement element = driver.findElement(By.linkText(databank.menu));
+		element.click();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
+		Assert.assertTrue(element.isSelected());
+	}
+
+	// Go to Contact us page
+	@Test
+	public void goToContactUs() {
+		WebElement element = driver.findElement(By.linkText(databank.contactUs));
+		element.click();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
+		Assert.assertTrue(element.isSelected());
+	}
+
+	// Go to Order Online page
+	@Test
+	public void goToAOrderOnline() {
+		WebElement element = driver.findElement(By.linkText(databank.orderOnline));
+		element.click();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
+		Assert.assertTrue(element.isSelected());
+	}
 }
