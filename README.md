@@ -1,4 +1,4 @@
-## Sample Project to pratice QA
+## Sample Project to practice QA
 
 Simple UI tests for http://www.padthairestaurant.ca/ written in Java using Selenium + TestNG
 
