@@ -32,7 +32,7 @@ public class Index {
     // Ensure we are selected on the home page (sanity test)
     @Test
     public void homepageSanity() {
-        String homeText = databank.navbarItems[0];
+        String homeText = databank.home;
         WebElement element = driver.findElement(By.linkText(homeText));
         Assert.assertTrue(element.isSelected());
     }
@@ -49,19 +49,27 @@ public class Index {
 	// Ensure contact info is available
     @Test
     public void confirmContactInfo() {
-        String bodyText = driver.findElement(By.tagName("body")).getText();
+        String sidecardText = driver.findElement(By.id(databank.sidebarId)).getText();
 		for(String info : databank.contactInfo) {
-			Assert.assertTrue(bodyText.contains(info));
+			Assert.assertTrue(sidecardText.contains(info));
 		}
     }
 
 	// Ensure restaurant hours are available
     @Test
     public void confirmHours() {
-		String bodyText = driver.findElement(By.tagName("body")).getText();
+		String sidecardText = driver.findElement(By.id(databank.sidebarId)).getText();
 		for(String hours : databank.hours) {
-			Assert.assertTrue(bodyText.contains(hours));
+			Assert.assertTrue(sidecardText.contains(hours));
 		}
+    }
+
+	// Confirm main content text
+    @Test
+    public void confirmMainContentText() {
+		String mainContent = driver.findElement(By.id(databank.mainContentId)).getText();
+		Assert.assertTrue(mainContent.contains(databank.welcomeText));
+		Assert.assertTrue(mainContent.contains(databank.ourCommitmentText));
     }
 
 	// Go to About us page
