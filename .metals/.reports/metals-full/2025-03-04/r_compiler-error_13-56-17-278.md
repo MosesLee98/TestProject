@@ -1,0 +1,85 @@
+file://<WORKSPACE>/src/test/java/Index.java
+### java.util.NoSuchElementException: next on empty iterator
+
+occurred in the presentation compiler.
+
+presentation compiler configuration:
+
+
+action parameters:
+offset: 864
+uri: file://<WORKSPACE>/src/test/java/Index.java
+text:
+```scala
+package test.java;
+import org.testng.Assert;
+import org.testng.annotations.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+
+public class Index {
+    WebDriver driver;
+    Databank databank = new Databank();
+
+    // Helper Functions
+    public boolean isClickable(WebElement element) {
+        return element.isDisplayed() && element.isEnabled();
+    }
+
+    // Setup driver and go to index.php
+    @BeforeTest
+    public void setup() {
+        driver = new ChromeDriver();
+        driver.get(databank.indexURL);
+    }
+
+    // Teardown driver
+    @AfterTest
+    public void teardown() {
+        driver.quit();
+    }
+
+    @Test
+    public void homepageSanity() {
+        String homeText = databank.navbarItems[@@]
+        Select selectedItem = new Select(driver.findElement(By.linkText()));
+        objSelect.selectByVisibleText("Automation");
+    }
+
+    // Ensure all buttons on navbar are clickable
+    @Test
+    public void confirmNavbarItems() {
+        for(String item : databank.navbarItems) {
+            WebElement element = driver.findElement(By.linkText(item));
+            Assert.assertTrue(isClickable(element));
+        }
+    }
+
+    @Test
+    public void 
+}
+
+```
+
+
+
+#### Error stacktrace:
+
+```
+scala.collection.Iterator$$anon$19.next(Iterator.scala:973)
+	scala.collection.Iterator$$anon$19.next(Iterator.scala:971)
+	scala.collection.mutable.MutationTracker$CheckedIterator.next(MutationTracker.scala:76)
+	scala.collection.IterableOps.head(Iterable.scala:222)
+	scala.collection.IterableOps.head$(Iterable.scala:222)
+	scala.collection.AbstractIterable.head(Iterable.scala:935)
+	dotty.tools.dotc.interactive.InteractiveDriver.run(InteractiveDriver.scala:164)
+	dotty.tools.pc.MetalsDriver.run(MetalsDriver.scala:45)
+	dotty.tools.pc.SignatureHelpProvider$.signatureHelp(SignatureHelpProvider.scala:32)
+	dotty.tools.pc.ScalaPresentationCompiler.signatureHelp$$anonfun$1(ScalaPresentationCompiler.scala:422)
+```
+#### Short summary: 
+
+java.util.NoSuchElementException: next on empty iterator

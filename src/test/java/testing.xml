@@ -1,0 +1,9 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<suite name = "Pad Thai Restaurant">
+   <test name = "Index">
+      <classes>
+         <class name = "Index" />
+      </classes>
+   </test>
+</suite>
