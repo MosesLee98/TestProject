@@ -1,0 +1,128 @@
+file://<WORKSPACE>/src/test/java/Contact.java
+### java.util.NoSuchElementException: next on empty iterator
+
+occurred in the presentation compiler.
+
+presentation compiler configuration:
+
+
+action parameters:
+offset: 3027
+uri: file://<WORKSPACE>/src/test/java/Contact.java
+text:
+```scala
+package test.java;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+public class Contact {
+    WebDriver driver;
+    Databank databank = new Databank();
+
+	// Setup driver and go to contact.php
+    @BeforeTest
+    public void setup() {
+        driver = new ChromeDriver();
+        driver.get(databank.contactURL);
+    }
+
+    // Teardown driver
+    @AfterTest
+    public void teardown() {
+        driver.quit();
+    }
+
+	// Ensure we are selected on the Contact us page (sanity test)
+    @Test
+    public void contactUsSanity() {
+        String contactUsText = databank.contactUs;
+        WebElement element = driver.findElement(By.linkText(contactUsText));
+        Assert.assertTrue(element.isSelected());
+    }
+
+	// Ensure contact info is available
+    @Test
+    public void confirmContactInfo() {
+        String sidecardText = driver.findElement(By.id(databank.sidebarId)).getText();
+		for(String info : databank.contactInfo) {
+			Assert.assertTrue(sidecardText.contains(info));
+		}
+    }
+
+	// Ensure restaurant hours are available
+    @Test
+    public void confirmHours() {
+		String sidecardText = driver.findElement(By.id(databank.sidebarId)).getText();
+		for(String hours : databank.weekdayHours) {
+			Assert.assertTrue(sidecardText.contains(hours));
+		}
+    }
+
+	// Confirm map is available (iframe)
+	@Test
+	public void confirmMapIframe() {
+		Assert.assertFalse(driver.findElements(By.tagName("iframe")).isEmpty());
+	}
+
+    // Ensure contact us form is available and submittable - Happy Path
+    @Test
+    public void contactUsFormSuccess() {
+        WebElement formName = driver.findElement(By.name(databank.formName));
+        WebElement formEmail = driver.findElement(By.name(databank.formEmail));
+        WebElement formComments = driver.findElement(By.name(databank.formComments));
+        WebElement formSubmit = driver.findElement(By.xpath("//input[@type='submit' and @value='Submit']"));
+        // fill in values
+        formName.sendKeys(databank.validName);
+        formEmail.sendKeys(databank.validEmail);
+        formComments.sendKeys(databank.validComments);
+        // press submit button
+        Assert.assertTrue(formSubmit.isDisplayed() && formSubmit.isEnabled());
+        // formSubmit.click();
+        // need to do more here to ensure form was actually submitted, ie: check db or email
+    }
+
+    // Ensure contact us form is not submittable with empty content
+    @Test
+    public void contactUsFormEmpty() {
+        WebElement formSubmit = driver.findElement(By.xpath("//input[@type='submit' and @value='Submit']"));
+        Assert.assertTrue(formSubmit.isDisplayed() && formSubmit.isEnabled());
+        formSubmit.click();
+
+        WebElement body = driver.findElement(By.tagName("body"));
+        Assert.assertTrue(body.getText().contains(databa@@))
+        if (body.getText().contains("Your Text Here")) {
+            System.out.println("Text found in body.");
+        } else {
+            System.out.println("Text not found.");
+        }
+        // need to do more here to ensure form was actually submitted, ie: check db or email
+    }
+}
+```
+
+
+
+#### Error stacktrace:
+
+```
+scala.collection.Iterator$$anon$19.next(Iterator.scala:973)
+	scala.collection.Iterator$$anon$19.next(Iterator.scala:971)
+	scala.collection.mutable.MutationTracker$CheckedIterator.next(MutationTracker.scala:76)
+	scala.collection.IterableOps.head(Iterable.scala:222)
+	scala.collection.IterableOps.head$(Iterable.scala:222)
+	scala.collection.AbstractIterable.head(Iterable.scala:935)
+	dotty.tools.dotc.interactive.InteractiveDriver.run(InteractiveDriver.scala:164)
+	dotty.tools.pc.MetalsDriver.run(MetalsDriver.scala:45)
+	dotty.tools.pc.completions.CompletionProvider.completions(CompletionProvider.scala:50)
+	dotty.tools.pc.ScalaPresentationCompiler.complete$$anonfun$1(ScalaPresentationCompiler.scala:146)
+```
+#### Short summary: 
+
+java.util.NoSuchElementException: next on empty iterator
