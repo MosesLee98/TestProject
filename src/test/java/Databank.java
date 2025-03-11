@@ -6,6 +6,7 @@ public class Databank {
     public String aboutUsURL = "http://www.padthairestaurant.ca/aboutus.php";
     public String contactURL = "http://www.padthairestaurant.ca/contact.php";
     public String sendFormURL = "http://www.padthairestaurant.ca/send_form_email.php";
+    public String menuURL = "http://www.padthairestaurant.ca/menu.php";
 
     // Navbar
     public String home = "Home";
@@ -53,6 +54,16 @@ public class Databank {
     public String validEmail = "QuinnHughes43@gmail.com";
     public String validComments = "Excellent Pad Thai here!";
     public String invalidEmail = "invalidEmail";
+
+    // Menu
+    public String lunch = "Lunch";
+    public String dinner = "Dinner";
+    public String[] menuTitles = {lunch, dinner};
+    public String[] lunchItems = {"Pad Thai with Salad", "Thai Fried Rice", "Mixed Vegetables in Garlic Sauce with Rice", "Ginger Chicken with Rice", 
+                                "Choice of Curry with Rice ( Green, Red, and Yellow )", "Sweet and Sour Chicken with Rice", 
+                                "Mixed Vegetables in Curry Sauce with Rice", "Chicken and Cashew Nuts with Rice", "Beef and Sweet Basil with Rice",
+                                "Garlic Chicken with Rice", "Small Tom Yum Gai", "Small Tom Kah Gai"};
+	public String[] lunchPrices = {"Chicken $15.95, \nShrimp $17.95", "$14.95", "$14.95", "$14.95", "$15.95, \nShrimp $17.95", "$14.95", "$14.95", "$15.95", "$14.95", "$14.95", "$6.95", "$6.95"};
 
     public Databank() {}
 }
